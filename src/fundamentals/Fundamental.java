@@ -24,23 +24,40 @@ public class Fundamental {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < original.length(); i++) {
             char nextChar = original.charAt(i);
-            nextChar = switchCase(nextChar);
+            nextChar = invertCaseChar(nextChar);
             result.append(nextChar);
         }
         return result.toString();
     }
 
-    private static char switchCase(char nextChar) {
-        if (Character.isLowerCase(nextChar)){
+    private static char invertCaseChar(char nextChar) {
+        if (Character.isLowerCase(nextChar)) {
             nextChar = Character.toUpperCase(nextChar);
-        }else{
-            nextChar= Character.toLowerCase(nextChar);
+        } else {
+            nextChar = Character.toLowerCase(nextChar);
         }
         return nextChar;
     }
-    
+
     public static String orderChars(String unorderedText) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        char[] charArray = unorderedText.toCharArray();
+        linearSortCharArray(charArray);
+        String result = new String(charArray);
+        return result;
+    }
+
+    private static void linearSortCharArray(char[] charArray) {
+        int lastIndex = charArray.length - 1;
+        char swap;
+        for (int i = 0; i < lastIndex; i++) {
+            for (int j = i + 1; j < charArray.length; j++) {
+                if (charArray[i] > charArray[j]) {
+                    swap = charArray[i];
+                    charArray[i]= charArray[j];
+                    charArray[j] = swap;
+                }
+            }
+        }
     }
 
     public static int countDifferentChars(String ordered) {
@@ -55,6 +72,5 @@ public class Fundamental {
             String original, String... swapChars) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-
 
 }
