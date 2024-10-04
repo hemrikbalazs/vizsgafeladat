@@ -21,9 +21,24 @@ public class Fundamental {
     }
 
     public static String invertCase(String original) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < original.length(); i++) {
+            char nextChar = original.charAt(i);
+            nextChar = switchCase(nextChar);
+            result.append(nextChar);
+        }
+        return result.toString();
     }
 
+    private static char switchCase(char nextChar) {
+        if (Character.isLowerCase(nextChar)){
+            Character.toUpperCase(nextChar);
+        }else{
+            Character.toLowerCase(nextChar);
+        }
+        return nextChar;
+    }
+    
     public static String orderChars(String unorderedText) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
@@ -40,5 +55,6 @@ public class Fundamental {
             String original, String... swapChars) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 
 }
