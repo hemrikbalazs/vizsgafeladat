@@ -53,7 +53,7 @@ public class Fundamental {
             for (int j = i + 1; j < charArray.length; j++) {
                 if (charArray[i] > charArray[j]) {
                     swap = charArray[i];
-                    charArray[i]= charArray[j];
+                    charArray[i] = charArray[j];
                     charArray[j] = swap;
                 }
             }
@@ -61,7 +61,13 @@ public class Fundamental {
     }
 
     public static int countDifferentChars(String ordered) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        int count = 0;
+        for (int i = 0; i < ordered.length(); i++) {
+            if (ordered.charAt(i) != ordered.charAt(i - 1)) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public static boolean containsCertainDigit(int number, int digit) {
