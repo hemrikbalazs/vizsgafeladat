@@ -12,7 +12,7 @@ public class Fundamental {
         System.out.println(ordered);
         int differentCharCount = countDifferentChars(ordered); // 14
         System.out.println("number of different chars:" + differentCharCount);
-        boolean contains = containsCertainDigit(4567, 6); // true
+        boolean contains = containsCertainDigit(4567, 5); // true
         System.out.println("4567 contains 6: " + contains);
         String changed = replaceUnderscores(
                 "Szer_tem___kihívásokat_és_a_vizsgákat.", "e", " ", "a", " ");// Szeretem a kihívásokat és a vizsgákat.
@@ -62,21 +62,35 @@ public class Fundamental {
 
     public static int countDifferentChars(String ordered) {
         int count = 0;
-        for (int i = 0; i < ordered.length(); i++) {
-            if (ordered.charAt(i) != ordered.charAt(i - 1)) {
-                count++;
+        if (ordered.length() > 0) {
+            count = 1;
+            for (int i = 1; i < ordered.length(); i++) {
+                if (ordered.charAt(i) != ordered.charAt(i - 1)) {
+                    count++;
+                }
             }
         }
         return count;
     }
 
     public static boolean containsCertainDigit(int number, int digit) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        boolean run = true;
+        while (run && number > 0){
+            run = !checkLastDigit(number, digit);
+            number = number / 10;
+        }
+        return !run;
     }
 
+    private static boolean checkLastDigit(int number, int digit) {
+        number -= digit;
+        return number %10 == 0;
+    }
+    
     public static String replaceUnderscores(
             String original, String... swapChars) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
+
 
 }
