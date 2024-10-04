@@ -32,9 +32,9 @@ public class Fundamental {
 
     private static char switchCase(char nextChar) {
         if (Character.isLowerCase(nextChar)){
-            Character.toUpperCase(nextChar);
+            nextChar = Character.toUpperCase(nextChar);
         }else{
-            Character.toLowerCase(nextChar);
+            nextChar= Character.toLowerCase(nextChar);
         }
         return nextChar;
     }
