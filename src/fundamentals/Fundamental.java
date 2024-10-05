@@ -75,7 +75,7 @@ public class Fundamental {
 
     public static boolean containsCertainDigit(int number, int digit) {
         boolean run = true;
-        while (run && number > 0){
+        while (run && number > 0) {
             run = !checkLastDigit(number, digit);
             number = number / 10;
         }
@@ -84,13 +84,22 @@ public class Fundamental {
 
     private static boolean checkLastDigit(int number, int digit) {
         number -= digit;
-        return number %10 == 0;
+        return number % 10 == 0;
     }
-    
+
     public static String replaceUnderscores(
             String original, String... swapChars) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        int index = 0;
+        int length = swapChars.length;
+        while (original.contains("_")) {
+            original = original.replaceFirst("_", swapChars[index]);
+            index += calculateIncrement(index, length);
+        }
+        return original;
     }
 
-
+    private static int calculateIncrement(int index, int length) {
+        int steps = length - 1 - index;
+        return (steps -1) >>> 31 ^ 1;
+    }
 }
