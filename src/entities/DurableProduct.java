@@ -41,6 +41,7 @@ public class DurableProduct extends ProductAbstract{
 
     private void setGrossWeight(double grossWeight) {
         CheckConstraints.checkNumberLowerBound(0, grossWeight, "grossWeight");
+        CheckConstraints.checkNumberUpperBound(999, grossWeight, "grossWeight");
         this.grossWeight = grossWeight;
     }
     
