@@ -10,17 +10,18 @@ import java.util.logging.Logger;
  *
  * @author Hemrik Balázs
  */
-public class SqlConnection {
+class SqlConnection {
     private static Connection connection;
-    private static String connectionString;
+    
+    private static final String CONNECTION_STRING;
 
     static {
-        connectionString = "jdbc:mysql://localhost:3306/storage";
+        CONNECTION_STRING = "jdbc:mysql://localhost:3306/storage";
     }
 
     static Connection getConnection() throws SQLException {
         if (connection == null) {
-            connection = DriverManager.getConnection(connectionString, "root",
+            connection = DriverManager.getConnection(CONNECTION_STRING, "root",
                     "Seb4dawin");
 
         }
