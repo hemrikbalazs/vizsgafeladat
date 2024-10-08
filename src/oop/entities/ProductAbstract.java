@@ -1,4 +1,7 @@
-package entities;
+package oop.entities;
+
+import oop.entities.Product;
+import oop.entities.CheckConstraints;
 
 /**
  *

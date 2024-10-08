@@ -1,6 +1,6 @@
-package entities;
+package oop.entities;
 
-import exceptions.EntityException;
+import oop.exceptions.EntityException;
 import java.time.LocalDate;
 
 /**

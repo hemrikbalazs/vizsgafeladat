@@ -1,6 +1,7 @@
-package persistence;
+package oop.persistence;
 
-import entities.Product;
+import oop.persistence.ProductHandler;
+import oop.entities.Product;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

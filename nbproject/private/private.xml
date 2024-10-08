@@ -3,14 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/ProductHandler.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/entities/Product.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/DurableProductHandler.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/SqlConnection.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/exceptions/EntityException.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/Util.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/PerishableProductHandler.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/entities/PerishableProduct.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/entities/CheckConstraints.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/entities/ProductAbstract.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/ProductHandlerType.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/entities/DurableProduct.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/persistence/ProductHandlerAbstract.java</file>
         </group>
     </open-files>
 </project-private>

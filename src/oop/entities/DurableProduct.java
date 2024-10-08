@@ -1,4 +1,6 @@
-package entities;
+package oop.entities;
+
+import oop.entities.CheckConstraints;
 
 /**
  *

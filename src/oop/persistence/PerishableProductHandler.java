@@ -1,7 +1,7 @@
-package persistence;
+package oop.persistence;
 
-import entities.PerishableProduct;
-import entities.Product;
+import oop.entities.PerishableProduct;
+import oop.entities.Product;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;

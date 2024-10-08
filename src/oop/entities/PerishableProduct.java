@@ -1,5 +1,6 @@
-package entities;
+package oop.entities;
 
+import oop.entities.CheckConstraints;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
 

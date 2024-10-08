@@ -1,4 +1,4 @@
-package exceptions;
+package oop.exceptions;
 
 /**
  * @author Hemrik Balázs

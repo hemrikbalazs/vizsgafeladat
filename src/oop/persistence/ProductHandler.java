@@ -1,6 +1,6 @@
-package persistence;
+package oop.persistence;
 
-import entities.Product;
+import oop.entities.Product;
 import java.util.List;
 
 /**

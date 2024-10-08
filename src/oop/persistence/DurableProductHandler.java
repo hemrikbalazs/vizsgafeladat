@@ -1,7 +1,7 @@
-package persistence;
+package oop.persistence;
 
-import entities.DurableProduct;
-import entities.Product;
+import oop.entities.DurableProduct;
+import oop.entities.Product;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

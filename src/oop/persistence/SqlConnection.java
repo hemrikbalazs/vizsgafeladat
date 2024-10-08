@@ -1,4 +1,4 @@
-package persistence;
+package oop.persistence;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
