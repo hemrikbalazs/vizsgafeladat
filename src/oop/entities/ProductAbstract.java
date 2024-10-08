@@ -1,8 +1,5 @@
 package oop.entities;
 
-import oop.entities.Product;
-import oop.entities.CheckConstraints;
-
 /**
  *
  * @author Hemrik Balázs
@@ -79,7 +76,7 @@ abstract class ProductAbstract implements Product {
         return quantity;
     }
 
-    public final void setQuantity(int quantity) {
+    protected final void setQuantity(int quantity) {
         CheckConstraints.checkNumberLowerBound(0, quantity, "quantity");
         this.quantity = quantity;
     }

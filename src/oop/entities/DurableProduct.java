@@ -1,13 +1,22 @@
 package oop.entities;
 
-import oop.entities.CheckConstraints;
+import oop.persistence.ProductHandler;
+import oop.persistence.ProductHandlerFactory;
+import oop.persistence.ProductHandlerType;
 
 /**
  *
  * @author Hemrik Balázs
  */
 public class DurableProduct extends ProductAbstract{
-
+    
+    private static final ProductHandler handler;
+    
+    static {
+        handler = ProductHandlerFactory.createProductHandler(
+                ProductHandlerType.DURABLE_PRODUCT);
+    }
+    
     private int warantyPeriod;
     private double grossWeight;
 
@@ -51,12 +60,13 @@ public class DurableProduct extends ProductAbstract{
     
     @Override
     public void save() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        handler.insert(this);
     }
 
     @Override
     public void editQuantity(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setQuantity(value);
+        handler.update(this);
     }
 
    

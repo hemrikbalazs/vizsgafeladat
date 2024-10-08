@@ -1,8 +1,10 @@
 package oop.entities;
 
-import oop.entities.CheckConstraints;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
+import oop.persistence.ProductHandler;
+import oop.persistence.ProductHandlerFactory;
+import oop.persistence.ProductHandlerType;
 
 /**
  *
@@ -10,6 +12,13 @@ import static java.time.temporal.ChronoUnit.DAYS;
  */
 public class PerishableProduct extends ProductAbstract{
 
+    private static final ProductHandler handler;
+    
+    static {
+        handler = ProductHandlerFactory.createProductHandler(
+                ProductHandlerType.PERISHABLE_PRODUCT);
+    }
+    
     private LocalDate expirationDate;
     private LocalDate productionDate;
 
@@ -51,12 +60,13 @@ public PerishableProduct(String articleNumber, String name, String brand,
     
     @Override
     public void save() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        handler.insert(this);
     }
 
     @Override
     public void editQuantity(int value) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        setQuantity(value);
+        handler.update(this);
     }
     
 }
