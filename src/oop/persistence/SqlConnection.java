@@ -3,8 +3,6 @@ package oop.persistence;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -29,15 +27,4 @@ class SqlConnection {
         return connection;
     }
 
-    static void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-            } catch (SQLException ex) {
-                Logger.getLogger(SqlConnection.class.getName()).
-                        log(Level.SEVERE, null, ex);
-            }
-            connection = null;
-        }
-    }
 }

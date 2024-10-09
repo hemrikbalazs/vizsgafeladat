@@ -1,6 +1,6 @@
 package oop.entities;
 
-import java.util.List;
+import oop.exceptions.PersistenceException;
 import oop.persistence.ProductHandler;
 import oop.persistence.ProductHandlerFactory;
 import oop.persistence.ProductHandlerType;
@@ -9,14 +9,14 @@ import oop.persistence.ProductHandlerType;
  *
  * @author Hemrik Balázs
  */
-public class StorageInventory {
-    
+public class StorageInventoryFactory {
+
     private static ProductHandler handler;
-    
-    private StorageInventory(){
+
+    private StorageInventoryFactory() {
     }
-    
-    public static ProductList getDurableProducts(){
+
+    public static ProductList createDurableProductsInventory() throws PersistenceException {
         handler = ProductHandlerFactory.createProductHandler(
                 ProductHandlerType.DURABLE_PRODUCT);
         return new ProductList(handler.selectAll(), new String[]{
@@ -25,8 +25,8 @@ public class StorageInventory {
             "CriticalQuantity", "Warany Period (months)", "Gross Weight"
         });
     }
-    
-    public static ProductList getPerishableProducts(){
+
+    public static ProductList createPerishableProductsInventory() throws PersistenceException {
         handler = ProductHandlerFactory.createProductHandler(
                 ProductHandlerType.PERISHABLE_PRODUCT);
         return new ProductList(handler.selectAll(), new String[]{
@@ -36,5 +36,5 @@ public class StorageInventory {
             "Expires In (days)"
         });
     }
-    
+
 }

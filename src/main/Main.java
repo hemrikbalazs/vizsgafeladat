@@ -4,7 +4,7 @@ import fundamentals.Fundamental;
 import java.util.List;
 import oop.entities.DurableProduct;
 import oop.entities.PerishableProduct;
-import oop.entities.StorageInventory;
+import oop.entities.StorageInventoryFactory;
 
 /**
  * @author --G--
@@ -17,9 +17,9 @@ public class Main {
         //you can use this to test your solutions
         Fundamental.testMySolutions();
         
-        
-        List<PerishableProduct> pProducts = StorageInventory.getPerishableProducts();
-        List<DurableProduct> dProducts = StorageInventory.getDurableProducts();
+        /*
+        List<PerishableProduct> pProducts = StorageInventoryFactory.getPerishableProducts();
+        List<DurableProduct> dProducts = StorageInventoryFactory.getDurableProducts();
         
         for (PerishableProduct product : pProducts) {
             System.out.println(product.getName());
@@ -29,7 +29,7 @@ public class Main {
         for (DurableProduct dProduct : dProducts) {
             System.out.println(dProduct.getName());
         }
-        
+        */
     }
 
 }

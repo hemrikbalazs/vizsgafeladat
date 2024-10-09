@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import oop.exceptions.PersistenceException;
 
 /**
  *
@@ -28,7 +29,7 @@ class DurableProductHandler extends ProductHandlerAbstract{
     }
     
     @Override
-    public void insert(Product product) {
+    public void insert(Product product) throws PersistenceException {
         DurableProduct dp = castProduct(product);
         String insert = String.format(INSERT_INTO, dp.getArticleNumber(),
                 dp.getName(), dp.getBrand(), dp.getFamily(), dp.getNettoPrice(),
@@ -38,7 +39,7 @@ class DurableProductHandler extends ProductHandlerAbstract{
     }
 
     @Override
-    public void update(Product product) {
+    public void update(Product product) throws PersistenceException {
         DurableProduct dp = castProduct(product);
         String update = String.format(UPDATE_QUANTITY, dp.getQuantity(),
                 dp.getArticleNumber());
@@ -46,8 +47,9 @@ class DurableProductHandler extends ProductHandlerAbstract{
     }
 
     @Override
-    public List<? extends Product> selectAll() {
+    public List<? extends Product> selectAll() throws PersistenceException {
         return executeQuery(SELECT_ALL);
+
     }
     
     @Override

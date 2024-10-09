@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import oop.exceptions.PersistenceException;
 
 /**
  *
@@ -30,7 +31,7 @@ class PerishableProductHandler extends ProductHandlerAbstract{
     
 
     @Override
-    public void insert(Product product) {
+    public void insert(Product product) throws PersistenceException {
         PerishableProduct pp = castProduct(product);
         String insert = String.format(INSERT_INTO, pp.getArticleNumber(),
                 pp.getName(), pp.getBrand(), pp.getFamily(), pp.getNettoPrice(),
@@ -41,7 +42,7 @@ class PerishableProductHandler extends ProductHandlerAbstract{
     }
 
     @Override
-    public void update(Product product) {
+    public void update(Product product) throws PersistenceException {
         PerishableProduct pp = castProduct(product);
         String update = String.format(UPDATE_QUANTITY, pp.getQuantity(),
                 pp.getArticleNumber());
@@ -49,7 +50,7 @@ class PerishableProductHandler extends ProductHandlerAbstract{
     }
 
     @Override
-    public List<? extends Product> selectAll() {
+    public List<? extends Product> selectAll() throws PersistenceException{
         return executeQuery(SELECT_ALL);
     }
     

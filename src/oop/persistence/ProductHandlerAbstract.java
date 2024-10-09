@@ -1,13 +1,11 @@
 package oop.persistence;
 
-import oop.persistence.ProductHandler;
 import oop.entities.Product;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import oop.exceptions.PersistenceException;
 
 /**
  *
@@ -17,25 +15,25 @@ abstract class ProductHandlerAbstract implements ProductHandler {
     
     private static SqlConnection sqlConnection;
 
-    protected final void executeNonQuery(String sqlCommand) {
+    protected final void executeNonQuery(String sqlCommand) 
+            throws PersistenceException {
         try (Statement statement = sqlConnection.getConnection().
                 createStatement()) {
             statement.execute(sqlCommand);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductHandlerAbstract.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            throw new PersistenceException(ex.getMessage());
         }
     }
 
-    protected final List<? extends Product> executeQuery(String queryString) {
+    protected final List<? extends Product> executeQuery(String queryString)
+            throws PersistenceException {
         List<Product> result = null;
         try (Statement statement = sqlConnection.getConnection().
                 createStatement(); ResultSet resultSet = statement.executeQuery(
                         queryString)) {
             result = (List<Product>) getResultFromResultSet(resultSet);
         } catch (SQLException ex) {
-            Logger.getLogger(ProductHandlerAbstract.class.getName()).
-                    log(Level.SEVERE, null, ex);
+            throw new PersistenceException(ex.getMessage());
         }
         return result;
     }

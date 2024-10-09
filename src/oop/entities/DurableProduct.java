@@ -1,5 +1,13 @@
 package oop.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oop.events.ErrorEvent;
+import oop.events.EventBroadcaster;
+import oop.events.EventListener;
+import oop.exceptions.PersistenceException;
 import oop.persistence.ProductHandler;
 import oop.persistence.ProductHandlerFactory;
 import oop.persistence.ProductHandlerType;
@@ -8,22 +16,24 @@ import oop.persistence.ProductHandlerType;
  *
  * @author Hemrik Balázs
  */
-public class DurableProduct extends ProductAbstract{
-    
+public class DurableProduct extends ProductAbstract implements EventBroadcaster {
+
     private static final ProductHandler handler;
-    
+
     static {
         handler = ProductHandlerFactory.createProductHandler(
                 ProductHandlerType.DURABLE_PRODUCT);
     }
-    
+
+    private final List<EventListener> listeners;
     private int warantyPeriod;
     private double grossWeight;
 
-    public DurableProduct(String articleNumber, String name, String brand, 
+    public DurableProduct(String articleNumber, String name, String brand,
             String family, int nettoPrice, int taxID, int quantity,
             String amountUnits, int criticalQuantity, int warantyPeriod,
             double grossWeight) {
+        this.listeners = new ArrayList<>();
         setArticleNumber(articleNumber);
         setName(name);
         setBrand(brand);
@@ -55,10 +65,10 @@ public class DurableProduct extends ProductAbstract{
         CheckConstraints.checkNumberUpperBound(999, grossWeight, "grossWeight");
         this.grossWeight = grossWeight;
     }
-    
+
     @Override
     public Object getAttributeByIndex(int index) {
-                Object result = getArticleNumber();
+        Object result = getArticleNumber();
         switch (index) {
             case 1:
                 result = getName();
@@ -99,18 +109,44 @@ public class DurableProduct extends ProductAbstract{
         }
         return result;
     }
-    
+
     @Override
     public void save() {
-        handler.insert(this);
+        try {
+            handler.insert(this);
+        } catch (PersistenceException ex) {
+            fireEvent("An error occured in the persistenc layer, check your"
+                    + "database connection");
+        }
     }
 
     @Override
     public void editQuantity(int value) {
         setQuantity(value);
-        handler.update(this);
+        try {
+            handler.update(this);
+        } catch (PersistenceException ex) {
+            fireEvent("An error occured in the persistenc layer, check your"
+                    + "database connection");
+        }
     }
 
+    @Override
+    public void addListener(EventListener listener) {
+        listeners.add(listener);
+    }
 
-   
+    @Override
+    public void removeListener(EventListener listener) {
+        listeners.remove(listener);
+    }
+
+    @Override
+    public void fireEvent(String message) {
+        ErrorEvent evt = new ErrorEvent(message, this);
+        for (EventListener listener : listeners) {
+            listener.handleErrorEvent(evt);
+        }
+    }
+
 }

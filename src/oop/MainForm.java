@@ -1,16 +1,22 @@
 package oop;
 
 import javax.swing.table.AbstractTableModel;
-import oop.entities.StorageInventory;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+import oop.entities.DurableProduct;
+import oop.entities.DurableProductsInventory;
+import oop.entities.PerishableProductsInventory;
+import oop.entities.StorageInventoryFactory;
 import oop.views.ProductTableModel;
 
 /**
  *
- * @author --G--
+ * @author Hemrik Balázs
  */
 public class MainForm extends javax.swing.JFrame {
     
     AbstractTableModel tableModel;
+    TableRowSorter<TableModel> sorter;
     
     /**
      * Creates new form MainForm
@@ -105,14 +111,22 @@ public class MainForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btDurableProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDurableProductsActionPerformed
-        tableModel = new ProductTableModel(StorageInventory.getDurableProducts());
+        DurableProductsInventory inventory = new DurableProductsInventory();
+        tableModel = new ProductTableModel(inventory.getProducts());
+        sorter = new TableRowSorter<>(tableModel);
         tbProducts.setModel(tableModel);
+        tbProducts.setRowSorter(sorter);
+        sorter.toggleSortOrder(0);
         lbTableName.setText("Durable Products");
     }//GEN-LAST:event_btDurableProductsActionPerformed
 
     private void btPerishableProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPerishableProductsActionPerformed
-        tableModel = new ProductTableModel(StorageInventory.getPerishableProducts());
+        PerishableProductsInventory inventory = new PerishableProductsInventory();
+        tableModel = new ProductTableModel(inventory.getProducts());
+        sorter = new TableRowSorter<>(tableModel);
         tbProducts.setModel(tableModel);
+        tbProducts.setRowSorter(sorter);
+        sorter.toggleSortOrder(0);
         lbTableName.setText("Perishable Products");
     }//GEN-LAST:event_btPerishableProductsActionPerformed
 

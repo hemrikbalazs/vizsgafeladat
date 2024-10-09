@@ -2,6 +2,14 @@ package oop.entities;
 
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import oop.events.ErrorEvent;
+import oop.events.EventBroadcaster;
+import oop.events.EventListener;
+import oop.exceptions.PersistenceException;
 import oop.persistence.ProductHandler;
 import oop.persistence.ProductHandlerFactory;
 import oop.persistence.ProductHandlerType;
@@ -10,7 +18,7 @@ import oop.persistence.ProductHandlerType;
  *
  * @author Hemrik Balázs
  */
-public class PerishableProduct extends ProductAbstract{
+public class PerishableProduct extends ProductAbstract implements EventBroadcaster{
 
     private static final ProductHandler handler;
     
@@ -19,6 +27,7 @@ public class PerishableProduct extends ProductAbstract{
                 ProductHandlerType.PERISHABLE_PRODUCT);
     }
     
+    private final List<EventListener> listeners;
     private LocalDate expirationDate;
     private LocalDate productionDate;
 
@@ -26,6 +35,7 @@ public PerishableProduct(String articleNumber, String name, String brand,
             String family, int nettoPrice, int taxID, int quantity,
             String amountUnits, int criticalQuantity, LocalDate expirationDate,
             LocalDate productionDate) {
+        this.listeners = new ArrayList<>();
         setArticleNumber(articleNumber);
         setName(name);
         setBrand(brand);
@@ -107,13 +117,41 @@ public PerishableProduct(String articleNumber, String name, String brand,
     
     @Override
     public void save() {
-        handler.insert(this);
+        try {
+            handler.insert(this);
+        } catch (PersistenceException ex) {
+            fireEvent("An error occured in the persistenc layer, check your"
+                    + "database connection");
+        }
     }
 
     @Override
     public void editQuantity(int value) {
         setQuantity(value);
-        handler.update(this);
+        try {
+            handler.update(this);
+        } catch (PersistenceException ex) {
+            fireEvent("An error occured in the persistenc layer, check your"
+                    + "database connection");
+        }
+    }
+
+    @Override
+    public void addListener(EventListener listener) {
+        listeners.add(listener);
+    }
+
+    @Override
+    public void removeListener(EventListener listener) {
+        listeners.remove(listener);
+    }
+
+    @Override
+    public void fireEvent(String message) {
+        ErrorEvent evt = new ErrorEvent(message, this);
+        for (EventListener listener : listeners) {
+            listener.handleErrorEvent(evt);
+        }
     }
 
     
