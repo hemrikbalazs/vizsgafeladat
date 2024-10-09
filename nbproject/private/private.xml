@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/StorageInventory.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/views/ProductTableModel.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/ProductAbstract.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/ProductList.java</file>
-            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/main/Main.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/PerishableProductsInventory.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/events/EventBroadcaster.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/DurableProductsInventory.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/PerishableProduct.java</file>
             <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/MainForm.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/DurableProduct.java</file>
+            <file>file:/C:/Users/Asus/OneDrive/Documents/Java%20képzés/vizsgafeladat/src/oop/entities/StorageInventoryFactory.java</file>
         </group>
     </open-files>
 </project-private>
