@@ -9,4 +9,6 @@ public interface Product {
     void save();
     
     void editQuantity(int value);
+    
+    Object getAttributeByIndex(int index);
 }

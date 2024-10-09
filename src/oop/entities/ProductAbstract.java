@@ -99,9 +99,9 @@ abstract class ProductAbstract implements Product {
         this.criticalQuantity = criticalQuantity;
     }
 
-    public final int getBrutto_price() {
-        int multiplier = taxID / 100 + 1;
-        return nettoPrice * multiplier;
+    public final int getBruttoPrice() {
+        double multiplier = (double) taxID / 100 + 1;
+        return (int) Math.round(nettoPrice * multiplier);
     }
 
     

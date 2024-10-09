@@ -1,16 +1,23 @@
 package oop;
 
+import javax.swing.table.AbstractTableModel;
+import oop.entities.StorageInventory;
+import oop.views.ProductTableModel;
+
 /**
  *
  * @author --G--
  */
 public class MainForm extends javax.swing.JFrame {
-
+    
+    AbstractTableModel tableModel;
+    
     /**
      * Creates new form MainForm
      */
     public MainForm() {
         initComponents();
+        btDurableProducts.doClick();
     }
 
     /**
@@ -22,21 +29,92 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProducts = new javax.swing.JTable();
+        btPerishableProducts = new javax.swing.JButton();
+        btDurableProducts = new javax.swing.JButton();
+        lbTableName = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tbProducts.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tbProducts);
+
+        btPerishableProducts.setText("Perishable Products");
+        btPerishableProducts.setFocusable(false);
+        btPerishableProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btPerishableProductsActionPerformed(evt);
+            }
+        });
+
+        btDurableProducts.setText("Durable Products");
+        btDurableProducts.setFocusable(false);
+        btDurableProducts.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btDurableProductsActionPerformed(evt);
+            }
+        });
+
+        lbTableName.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        lbTableName.setFocusable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lbTableName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btDurableProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btPerishableProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btDurableProducts)
+                    .addComponent(btPerishableProducts))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lbTableName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btDurableProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDurableProductsActionPerformed
+        tableModel = new ProductTableModel(StorageInventory.getDurableProducts());
+        tbProducts.setModel(tableModel);
+        lbTableName.setText("Durable Products");
+    }//GEN-LAST:event_btDurableProductsActionPerformed
+
+    private void btPerishableProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPerishableProductsActionPerformed
+        tableModel = new ProductTableModel(StorageInventory.getPerishableProducts());
+        tbProducts.setModel(tableModel);
+        lbTableName.setText("Perishable Products");
+    }//GEN-LAST:event_btPerishableProductsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +157,10 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btDurableProducts;
+    private javax.swing.JButton btPerishableProducts;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbTableName;
+    private javax.swing.JTable tbProducts;
     // End of variables declaration//GEN-END:variables
 }

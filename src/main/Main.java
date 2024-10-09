@@ -17,7 +17,7 @@ public class Main {
         //you can use this to test your solutions
         Fundamental.testMySolutions();
         
-        /*
+        
         List<PerishableProduct> pProducts = StorageInventory.getPerishableProducts();
         List<DurableProduct> dProducts = StorageInventory.getDurableProducts();
         
@@ -29,7 +29,7 @@ public class Main {
         for (DurableProduct dProduct : dProducts) {
             System.out.println(dProduct.getName());
         }
-        */
+        
     }
 
 }

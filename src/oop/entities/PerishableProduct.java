@@ -59,6 +59,53 @@ public PerishableProduct(String articleNumber, String name, String brand,
     }
     
     @Override
+    public Object getAttributeByIndex(int index) {
+        Object result = getArticleNumber();
+        switch (index) {
+            case 1:
+                result = getName();
+                break;
+            case 2:
+                result = getBrand();
+                break;
+            case 3:
+                result = getFamily();
+                break;
+            case 4:
+                result = getNettoPrice();
+                break;
+            case 5:
+                result = getBruttoPrice();
+                break;
+            case 6:
+                result = getTaxID();
+                break;
+            case 7:
+                result = getQuantity();
+                break;
+            case 8:
+                result = getAmountUnits();
+                break;
+            case 9:
+                result = getCriticalQuantity();
+                break;
+            case 10:
+                result = getProductionDate();
+                break;
+            case 11:
+                result = getExpirationDate();
+                break;
+            case 12:
+                result= getDaysUntilExpiration();
+                break;
+            default:
+                result = getArticleNumber();
+                break;
+        }
+        return result;
+    }
+    
+    @Override
     public void save() {
         handler.insert(this);
     }
@@ -68,5 +115,6 @@ public PerishableProduct(String articleNumber, String name, String brand,
         setQuantity(value);
         handler.update(this);
     }
+
     
 }

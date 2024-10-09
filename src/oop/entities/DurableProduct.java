@@ -56,7 +56,49 @@ public class DurableProduct extends ProductAbstract{
         this.grossWeight = grossWeight;
     }
     
-    
+    @Override
+    public Object getAttributeByIndex(int index) {
+                Object result = getArticleNumber();
+        switch (index) {
+            case 1:
+                result = getName();
+                break;
+            case 2:
+                result = getBrand();
+                break;
+            case 3:
+                result = getFamily();
+                break;
+            case 4:
+                result = getNettoPrice();
+                break;
+            case 5:
+                result = getBruttoPrice();
+                break;
+            case 6:
+                result = getTaxID();
+                break;
+            case 7:
+                result = getQuantity();
+                break;
+            case 8:
+                result = getAmountUnits();
+                break;
+            case 9:
+                result = getCriticalQuantity();
+                break;
+            case 10:
+                result = getWarantyPeriod();
+                break;
+            case 11:
+                result = getGrossWeight();
+                break;
+            default:
+                result = getArticleNumber();
+                break;
+        }
+        return result;
+    }
     
     @Override
     public void save() {
@@ -68,6 +110,7 @@ public class DurableProduct extends ProductAbstract{
         setQuantity(value);
         handler.update(this);
     }
+
 
    
 }
