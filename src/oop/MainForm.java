@@ -3,17 +3,17 @@ package oop;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
-import oop.entities.DurableProduct;
 import oop.entities.DurableProductsInventory;
 import oop.entities.PerishableProductsInventory;
-import oop.entities.StorageInventoryFactory;
+import oop.events.ErrorEvent;
+import oop.events.EventListener;
 import oop.views.ProductTableModel;
 
 /**
  *
  * @author Hemrik Balázs
  */
-public class MainForm extends javax.swing.JFrame {
+public class MainForm extends javax.swing.JFrame implements EventListener {
     
     AbstractTableModel tableModel;
     TableRowSorter<TableModel> sorter;
@@ -35,11 +35,26 @@ public class MainForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dlError = new javax.swing.JDialog();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbProducts = new javax.swing.JTable();
         btPerishableProducts = new javax.swing.JButton();
         btDurableProducts = new javax.swing.JButton();
         lbTableName = new javax.swing.JLabel();
+        btAddProduct = new javax.swing.JButton();
+
+        dlError.setTitle("Error");
+
+        javax.swing.GroupLayout dlErrorLayout = new javax.swing.GroupLayout(dlError.getContentPane());
+        dlError.getContentPane().setLayout(dlErrorLayout);
+        dlErrorLayout.setHorizontalGroup(
+            dlErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        dlErrorLayout.setVerticalGroup(
+            dlErrorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,6 +90,14 @@ public class MainForm extends javax.swing.JFrame {
         lbTableName.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         lbTableName.setFocusable(false);
 
+        btAddProduct.setText("AddProduct");
+        btAddProduct.setFocusable(false);
+        btAddProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btAddProductActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -84,18 +107,20 @@ public class MainForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1264, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lbTableName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btDurableProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btPerishableProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(lbTableName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btDurableProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btPerishableProducts, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(btAddProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btDurableProducts)
@@ -103,8 +128,10 @@ public class MainForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbTableName, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 661, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btAddProduct)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -112,6 +139,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btDurableProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDurableProductsActionPerformed
         DurableProductsInventory inventory = new DurableProductsInventory();
+        //inventory.addListener(this); -- :(
         tableModel = new ProductTableModel(inventory.getProducts());
         sorter = new TableRowSorter<>(tableModel);
         tbProducts.setModel(tableModel);
@@ -122,6 +150,7 @@ public class MainForm extends javax.swing.JFrame {
 
     private void btPerishableProductsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPerishableProductsActionPerformed
         PerishableProductsInventory inventory = new PerishableProductsInventory();
+        //inventory.addListener(this); -- mennyi időt öltem ebbe de nem jó sajnos
         tableModel = new ProductTableModel(inventory.getProducts());
         sorter = new TableRowSorter<>(tableModel);
         tbProducts.setModel(tableModel);
@@ -129,6 +158,16 @@ public class MainForm extends javax.swing.JFrame {
         sorter.toggleSortOrder(0);
         lbTableName.setText("Perishable Products");
     }//GEN-LAST:event_btPerishableProductsActionPerformed
+
+    private void btAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddProductActionPerformed
+        /*
+        sajnos kifutottam az időből de nyilván ide jött volna a kód ami egy
+        új termék felvételét kezdeményezi, a háttérben a kód nagyrésze meg van
+        írva. A persistence réteg és az entititások felkészültek erre a funkcióra
+        sajnos a nem működő kivételkezeléssel elvesztegettem az időt.
+        */
+        
+    }//GEN-LAST:event_btAddProductActionPerformed
 
     /**
      * @param args the command line arguments
@@ -171,10 +210,18 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btAddProduct;
     private javax.swing.JButton btDurableProducts;
     private javax.swing.JButton btPerishableProducts;
+    private javax.swing.JDialog dlError;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbTableName;
     private javax.swing.JTable tbProducts;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void handleErrorEvent(ErrorEvent evt) {
+        //dlError.setVisible(true); -- ez így nem jó
+    }
+
 }
